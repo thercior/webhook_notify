@@ -23,7 +23,7 @@ Back-end: Python, Docker
 Estão disponíveis duas formas para rodar a aplicação localmente em sua máquina. Antes de rodar, é necessário baixar a aplicação pelo comando abaixo:
 
 ```bash
-git clone https://github.com/thercior/code-assistent.git
+git clone https://github.com/thercior/webhook_notify.git
 ```
 
 ###### Ambiente virtual
