@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de Curso por Link de Afiliado</title>
+</head>
+<body>
+    <div class="container">
+        <p>
+            <h3>Houve em {{ created_at }} a compra do curso {{ Product.product_name }} pelo seu link de afiliados</h3>
+        </p>
+        <hr>
+        <p> Olá <strong>Thércio!</strong> Um cliente comprou o curso {{ Product.product_name }}. Segue abaixo os dados do cliente e da transação</p>
+        <br>
+        
+        <div>
+            <h5>Dados do Cliente</h5>
+            <p>Cliente: {{ Customer.full_name }}</p>
+            <p>email: {{ Customer.email }}</p>
+            <p>Contato: {{ Customer.mobile }}</p>
+            <p>CPF: {{ Customer.CPF }}</p>
+            <p>IP de compra: {{ Customer.ip }}</p>
+            <hr>
+            <h5>Dados da compra</h5>
+            <p>Tipo de produto: {% if product_type == 'membership' %} Membros {% else %} Avulsos {% endif %}</p>
+            <p>Identificação do Produto: {{ Product.product_id }}</p>
+            <p>Produto: {{ Product.product_name }}</p>
+            <p>Ordem: {{ order_id }}</p>
+            <p>Status da compra: {% if order_status == 'paid'%} Pago {% else %} Pendente ou Cancelado {% endif %}</p>
+            <p>Método de pagamento: {{ payment_method }}</p>
+            <p>Valor do produto: {{ Commissions.charge_amount }}</p>
+            <p>Minha Comissão: {{ Commissions.my_commission }}</p>
+            <p>Próximo pagamento: {{ Subscription.next_payment }}</p>
+        </div>
+        <br>
+        <p>Para maiores informações, acesse seu painel de produtor do Kiwify.</p>
+        <hr>
+        <p>Atenciosamente,</p>
+        <h3>TR Solutions 2024©</h3>
+        <br>
+        <img src="https://dsm01pap007files.storage.live.com/y4mhaOUA28Ow1j1IyW0ZmrcjvX0Qc9xITeNIDW79X22LgtmOgMDetA8qChr3MPScCdiJPjTugrdSxzsVGWVgJSKk2Y-p0F0bjQo8QQwTBk0RpFEBj7T0jT9jIXgCdF019kJ3_lgAy2KFN5JNdOGxETtpoHC5jDdpvde6VwGPojKqw5HxSubr-fjZAhhNGCeArWV29pLh1sONq1g7Rtr0NvMncz4KfJhkSOJ7K7wflJx_u8?encodeFailures=1&width=1366&height=341" alt="Assinatura">
+
+    </div>
+</body>
+</html>
