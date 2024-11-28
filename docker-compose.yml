@@ -1,46 +1,46 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db_notify:
     image: postgres:latest
-    container_name: notify_postgres_db
-    volumes:
-      - notify_postgres_data:/var/lib/postgres/data
-    env_file: config/.env
+    container_name: webhook_notify_postgres_db
+    env_file: .env
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_PORT: ${DB_PORT}
     ports:
-      - "5433:5432"
+      - "${DB_PORT}:5432"
+    volumes:
+      - webhook_notify_postgres_data:/var/lib/postgres/data
     networks:
-      - notify_network
+      - webhook_notify_network
 
-  notify:
+  webhook_notify:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: notify
+    container_name: webhook_notify
     command: >
-      sh -c "./wait-for-it.sh db_notify:5432 -- python manage.py makemigrations &&
-        python manage.py migrate &&
-        python manage.py collectstatic --noinput &&
-        gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+      sh -c "./wait-for-it.sh db_notify:${DB_PORT} -- python manage.py makemigrations &&
+            python manage.py migrate &&
+            python manage.py collectstatic --noinput &&
+            gunicorn config.wsgi:application --bind 0.0.0.0:8000"
     ports:
-      - "8061:8080"
-    env_file: config/.env
+      - "8061:8000"
     volumes:
-      - static_volume:/notify/staticfiles
+      - static_volume:/webhook_notify/staticfiles
+    env_file: 
+      - ./config/.env
     depends_on:
       - db_notify
     networks:
-      - notify_network
+      - webhook_notify_network
 
 networks:
-  notify_network:
+  webhook_notify_network:
     driver: bridge
 
 volumes:
-  notify_postgres_data:
+  webhook_notify_postgres_data:
   static_volume:
