@@ -12,7 +12,7 @@ services:
     ports:
       - "${DB_PORT}:5432"
     volumes:
-      - webhook_notify_postgres_data:/var/lib/postgres/data
+      - webhook_notify_postgres_data:/var/lib/postgresql/data
     networks:
       - webhook_notify_network
 
