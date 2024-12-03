@@ -19,9 +19,6 @@ COPY wait-for-it.sh /webhook_notify/
 # Atribui permissão de execução para o container
 RUN chmod +x /webhook_notify/wait-for-it.sh
 
-# Permissão para acessar volume
-RUN chmod -R 755 /var/lib/docker/volumes/webhook_notify_static_volume/_data
-
 # Copia o arquivo requirements.txt com as depdências da aplicação.
 COPY requirements.txt /webhook_notify/
 
