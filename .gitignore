@@ -141,6 +141,9 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# Archives uwsgi
+*.ini
+
 # Environments
 .env
 .venv
