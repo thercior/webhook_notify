@@ -24,10 +24,11 @@ COPY requirements.txt /webhook_notify/
 
 # Instala as dependências do projeto
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install gunicorn
+    pip install uwsgi
 
 # Copia o código da aplicação para o container
 COPY . /webhook_notify/
+COPY webhook_notify_uwsgi.ini /webhook_notify/webhook_notify_uwsgi.ini
 
 # Definir variáveis de ambiente
 ENV DJANGO_SETTINGS_MODULE=config.settings \
