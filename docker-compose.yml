@@ -28,7 +28,7 @@ services:
     ports:
       - "8061:8000"
     volumes:
-      - static_volume:/webhook_notify/static
+      - static_volume:/webhook_notify/staticfiles
     env_file: 
       - ./config/.env
     depends_on:
